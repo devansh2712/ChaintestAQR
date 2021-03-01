@@ -19,18 +19,21 @@ class BlockChain extends React.Component {
     try 
     {
 	  await ThanosWallet.isAvailable();
-	  this.wallet = new ThanosWallet("AqarChain");
-	  await this.wallet.connect('mainnet' | 'delphinet' | 'carthagenet' | 'labnet' | 'sandbox');
-	  this.tezos = this.wallet.toTezos();
+	  const wallet = new ThanosWallet("AqarChain");
+	  await wallet.connect('delphinet');
 	  
-	  this.aqrcontract = await this.tezos.wallet.at("KT1B3Z5wdRamFmWipVk9DdTW3mDW2qtrqDAW");
+	  const tezos = wallet.toTezos();
+	  this.aqrcontract = await tezos.wallet.at("KT1B3Z5wdRamFmWipVk9DdTW3mDW2qtrqDAW");
+	  
+	  
     }
+
     catch(e)
     {
     console.log(e , 'Error');
     }
 }
-		 
+	
 	state = {
 	tokenAddress: "",
 	amount: "",
